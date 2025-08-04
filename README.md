@@ -29,37 +29,17 @@ techdb-breno/
 
 ---
 
-## ⚙️ Acesso ao Banco de Dados Oracle Cloud
+## 🔐 Acesso ao Banco de Dados
 
-Um ambiente de testes foi disponibilizado na **Oracle Cloud Free Tier**, contendo a estrutura do banco `TECHDB`.
+Por questões de segurança e confidencialidade, as credenciais de acesso (usuário e senha) e o arquivo **Oracle Wallet** não estão disponíveis publicamente neste repositório.
 
-### 🔐 Informações de Conexão
+Para garantir a integridade do ambiente de testes, essas informações serão fornecidas **somente mediante solicitação por email**.
 
-| Campo             | Valor (exemplo)                       |
-|------------------|----------------------------------------|
-| **Usuário**       | `admin` ou `avaliador`                |
-| **Senha**         | `OracleTeste@12345`                   |
-| **Host**          | `adb.sa-saopaulo-1.oraclecloud.com`   |
-| **Porta**         | `1522`                                |
-| **Service Name**  | `techdb_high`                         |
-| **Conexão**       | Oracle Wallet (disponível abaixo)     |
+Caso precise acessar o banco para avaliação, por favor, entre em contato através do email:  
+**brenoreisrv@gmail.com**
 
-> **Download do Wallet (.zip)**: [Clique aqui para baixar](https://sua-url-do-wallet-oracle.com)
+As credenciais e o arquivo Wallet serão enviados diretamente para o avaliador, garantindo o controle seguro do acesso ao banco de dados.
 
----
-
-### ✅ Como se conectar usando SQL Developer
-
-1. Abra o **Oracle SQL Developer**
-2. Vá em **New Connection**
-3. Preencha os campos:
-   - **Connection Name**: `TECHDB`
-   - **Username**: `ADMIN`
-   - **Password**: `OracleDB@159753`
-   - **Connection Type**: `Cloud Wallet`
-   - **Configuration File**: selecione o `.zip` baixado do Wallet
-   - **Service**: `techdb_high`
-4. Clique em **Test** → depois em **Connect**
 
 ---
 
