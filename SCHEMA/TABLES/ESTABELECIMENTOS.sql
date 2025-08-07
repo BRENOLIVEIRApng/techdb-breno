@@ -1,0 +1,17 @@
+CREATE TABLE ESTABELECIMENTOS (
+    ID_ESTABELECIMENTO  NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    NOME_FANTASIA       VARCHAR2(100 BYTE) NOT NULL,
+    CNPJ                VARCHAR2(14 BYTE)  UNIQUE NOT NULL,
+    TAXA_COMISSAO       NUMBER(5,2) DEFAULT 0
+);
+
+--IDX_ESTABELECIMENTOS_NOME
+CREATE INDEX IDX_ESTABELECIMENTOS_NOME ON ESTABELECIMENTOS(NOME_FANTASIA);
+CREATE INDEX IDX_ESTABELECIMENTOS_CNPJ ON ESTABELECIMENTOS(CNPJ);
+
+COMMENT ON TABLE ESTABELECIMENTOS   IS 'Tabela que armazena os estabelecimentos credenciados para transações com cartões da empresa Tech.';
+
+COMMENT ON COLUMN ESTABELECIMENTOS.ID_ESTABELECIMENTO   IS 'Código estabelecimento.';
+COMMENT ON COLUMN ESTABELECIMENTOS.NOME_FANTASIA        IS 'Nome comercial do estabelecimento utilizado nas transações.';
+COMMENT ON COLUMN ESTABELECIMENTOS.CNPJ                 IS 'Cadastro Nacional da Pessoa Jurídica do estabelecimento (14 dígitos numéricos, único).';
+COMMENT ON COLUMN ESTABELECIMENTOS.TAXA_COMISSAO        IS 'Taxa de comissão aplicada às transações realizadas com este estabelecimento.';
