@@ -1,12 +1,15 @@
 CREATE OR REPLACE PROCEDURE PR_PROCESSAR_TRANSACAO (
-    P_ID_CARTAO           IN TRANSACOES.ID_CARTAO%TYPE,
-    P_ID_ESTABELECIMENTO  IN TRANSACOES.ID_ESTABELECIMENTO%TYPE,
-    P_VALOR_TRANSACAO     IN TRANSACOES.VALOR_TRANSACAO%TYPE
+                                                    P_ID_CARTAO           IN TRANSACOES.ID_CARTAO%TYPE,
+                                                    P_ID_ESTABELECIMENTO  IN TRANSACOES.ID_ESTABELECIMENTO%TYPE,
+                                                    P_VALOR_TRANSACAO     IN TRANSACOES.VALOR_TRANSACAO%TYPE
 ) AS
     V_LIMITE                  CARTOES.LIMITE_CREDITO%TYPE;
-    V_ESTABELECIMENTO_EXISTE NUMBER;
+    V_ESTABELECIMENTO_EXISTE  NUMBER;
 BEGIN
-    -- VERIFICA SE O CARTÃO EXISTE E PEGA O LIMITE
+
+-- =============================================================================
+-- ========== VERIFICA SE O CARTÃO EXISTE E PEGA O LIMITE ======================
+-- =============================================================================
     BEGIN
         SELECT LIMITE_CREDITO
           INTO V_LIMITE
@@ -17,7 +20,10 @@ BEGIN
             RAISE_APPLICATION_ERROR(-20001, 'CARTÃO NÃO ENCONTRADO.');
     END;
 
-    -- VERIFICA SE O ESTABELECIMENTO EXISTE
+-- =============================================================================
+-- ============ VERIFICA SE O ESTABELECIMENTO EXISTE ===========================
+-- =============================================================================
+
     BEGIN
         SELECT 1
           INTO V_ESTABELECIMENTO_EXISTE
@@ -28,9 +34,12 @@ BEGIN
             RAISE_APPLICATION_ERROR(-20002, 'ESTABELECIMENTO NÃO ENCONTRADO.');
     END;
 
-    -- VERIFICA SALDO DISPONÍVEL
+-- =============================================================================
+-- ========= VERIFICA SALDO DISPONÍVEL SE TRUE REGISTRA TRANSAÇÃO ==============
+-- =============================================================================
+
     IF FN_VERIFICAR_SALDO_DISPONIVEL(P_ID_CARTAO, P_VALOR_TRANSACAO)  THEN
-        -- INSERE A TRANSAÇÃO
+
         INSERT INTO TRANSACOES (
             ID_CARTAO,
             ID_ESTABELECIMENTO,

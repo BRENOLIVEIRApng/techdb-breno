@@ -2,8 +2,12 @@ CREATE OR REPLACE PROCEDURE PR_ATUALIZAR_SALDOS_CARTOES
 IS
     V_DATA_INICIO DATE := TRUNC(SYSDATE - 1); -- 00:00 DO DIA ANTERIOR
     V_DATA_FIM    DATE := TRUNC(SYSDATE);     -- 00:00 DO DIA ATUAL
+
+-- =============================================================================
+-- =========== LOOP PARA PROCESSAR TRANSACOES VALIDAS DO DIA ANTERIOR ==========
+-- =============================================================================
 BEGIN
-    -- LOOP PARA PROCESSAR TRANSACOES VALIDAS DO DIA ANTERIOR
+
     FOR R IN (
         SELECT 
             T.ID_CARTAO,
@@ -14,7 +18,10 @@ BEGIN
           AND T.DATA_TRANSACAO < V_DATA_FIM
         GROUP BY T.ID_CARTAO
     ) LOOP
-        -- ATUALIZA O SALDO DO CARTAO (SUBTRAI VALOR TOTAL DO DIA ANTERIOR)
+-- =============================================================================
+-- ====== ATUALIZA O SALDO DO CARTAO (SUBTRAI VALOR TOTAL DO DIA ANTERIOR) =====
+-- =============================================================================
+
         UPDATE CARTOES
         SET LIMITE_CREDITO = LIMITE_CREDITO - R.TOTAL_GASTO
         WHERE ID_CARTAO = R.ID_CARTAO;

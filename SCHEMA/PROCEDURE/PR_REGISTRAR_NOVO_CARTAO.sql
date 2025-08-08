@@ -8,8 +8,11 @@ IS
     V_EXIST_CLIENTE        NUMBER := 0;
     V_EXIST_DEPARTAMENTO   NUMBER := 0;
     V_EXIST_HASH           NUMBER := 0;
+
+-- =============================================================================
+-- ================== VERIFICA SE O CLIENTE EXISTE =============================
+-- =============================================================================
 BEGIN
-    -- VERIFICA SE O CLIENTE EXISTE
     SELECT COUNT(*)
     INTO V_EXIST_CLIENTE
     FROM CLIENTES
@@ -19,7 +22,10 @@ BEGIN
                 RAISE_APPLICATION_ERROR(-20001, 'ERRO: CLIENTE COM ID ' || P_ID_CLIENTE || ' NÃO EXISTE.');
             END IF;
 
-    -- VERIFICA SE O DEPARTAMENTO EXISTE E PERTENCE AO CLIENTE
+-- =============================================================================
+-- ======== VERIFICA SE O DEPARTAMENTO EXISTE E PERTENCE AO CLIENTE ============
+-- =============================================================================
+
     SELECT COUNT(*)
     INTO V_EXIST_DEPARTAMENTO
     FROM DEPARTAMENTOS
@@ -30,7 +36,10 @@ BEGIN
                 RAISE_APPLICATION_ERROR(-20002, 'ERRO: DEPARTAMENTO INVÁLIDO OU NÃO PERTENCE AO CLIENTE INFORMADO.');
             END IF;
 
-    -- VERIFICA SE O HASH DO CARTÃO JÁ EXISTE
+-- =============================================================================
+-- ============ VERIFICA SE O HASH DO CARTÃO JÁ EXISTE =========================
+-- =============================================================================
+
     SELECT COUNT(*)
     INTO V_EXIST_HASH
     FROM CARTOES
@@ -40,12 +49,18 @@ BEGIN
                 RAISE_APPLICATION_ERROR(-20003, 'ERRO: NÚMERO DO CARTÃO JÁ ESTÁ CADASTRADO (HASH DUPLICADO).');
             END IF;
 
-        -- VALIDA LIMITE DE CRÉDITO
+-- =============================================================================
+-- ================ VALIDA LIMITE DE CRÉDITO ===================================
+-- =============================================================================
+
         IF P_LIMITE_CREDITO < 0 THEN
             RAISE_APPLICATION_ERROR(-20004, 'ERRO: LIMITE DE CRÉDITO NÃO PODE SER NEGATIVO.');
         END IF;
 
-    -- INSERE O NOVO CARTÃO
+-- =============================================================================
+-- ======================= INSERE O NOVO CARTÃO ================================
+-- =============================================================================
+
     INSERT INTO CARTOES (
         ID_CLIENTE,
         ID_DEPARTAMENTO,

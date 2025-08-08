@@ -9,10 +9,13 @@ CREATE OR REPLACE TRIGGER TRG_AUDITORIA_LIMITE
 DECLARE
     V_USUARIO  VARCHAR2(50);
 BEGIN
-    -- PEGA O USUÁRIO ATUAL DA SESSÃO
+
     V_USUARIO := SYS_CONTEXT('USERENV', 'SESSION_USER');
 
-    -- REGISTRA A ALTERAÇÃO DO LIMITE DE CRÉDITO
+-- =============================================================================
+-- ========== REGISTRA A ALTERAÇÃO DO LIMITE DE CRÉDITO ========================
+-- =============================================================================
+
     INSERT INTO LOG_ALTERACAO_LIMITE (
         ID_CARTAO,
         LIMITE_ANTIGO,
