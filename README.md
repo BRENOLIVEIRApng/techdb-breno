@@ -15,8 +15,15 @@ Este repositório contém o **versionamento completo do banco de dados Oracle** 
 
 ## 📁 Estrutura do Repositório
 
-techdb-breno/ ├── scripts/ │ ├── 01_create_tables.sql │ ├── 02_insert_sample_data.sql │ ├── 03_views.sql │ ├── 04_procedures.sql │ └── 05_test_queries.sql └── docs/ └── instrucoes_de_teste.md
-
+techdb-breno/
+├── scripts/
+│   ├── 01_create_tables.sql
+│   ├── 02_insert_sample_data.sql
+│   ├── 03_views.sql
+│   ├── 04_procedures.sql
+│   └── 05_test_queries.sql
+└── docs/
+    └── instrucoes_de_teste.md
 ---
 
 ## 🔐 Acesso ao Banco de Dados
